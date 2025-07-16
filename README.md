@@ -1,8 +1,18 @@
 # smart-cctv-project
 
-Alarm function (works)
-Obecjt Detection (Work)
-survielence (Works)
+Alarm function (works)  
+Object Detection (works)  
+Surveillance (works)
 
-Problem - it keeps open a new screen for every frame, 
-solution: Find and debug the problem or let the survielence stay on then swith it to YOLOv8 when time hits 
+## How to Run
+
+To start the software, run `run.py` in your terminal or IDE:
+
+```bash
+python run.py
+```
+
+The project is **still in progress** and may have bugs or incomplete features.
+
+**Problem:** It currently opens a new screen for every frame.  
+**Solution:** Debug the display logic or keep surveillance on, then switch to YOLOv8 when the time hits

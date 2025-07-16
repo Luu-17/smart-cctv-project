@@ -1,6 +1,6 @@
 from ultralytics import YOLO
 
-def detect_objects(frame):
+def detect_objects(frame,model):
 
     # Load an official or custom model
     model = YOLO("yolo11n.pt")  # Load an official Detect model
@@ -9,5 +9,12 @@ def detect_objects(frame):
     # model = YOLO("path/to/best.pt")  # Load a custom trained model
 
     # Perform tracking with the model
-    results = model.track(frame, show=True, classes=[0,2])  # Tracking with default tracker
+    results = model.track(frame, classes=[0,2])  # Tracking with default tracker
     # results = model.track("https://youtu.be/LNwODJXcvt4", show=True, tracker="bytetrack.yaml")  # with ByteTrack
+
+    # Draw results on the frame (if results exist)
+    if results and hasattr(results[0], 'plot'):
+        detected_frame = results[0].plot()  # Draw boxes, etc.
+        return detected_frame
+    else:
+        return frame

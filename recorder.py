@@ -1,26 +1,35 @@
 import cv2
-import os
+from ultralytics import YOLO
 from detector import detect_objects
 
 def capture():
-   # Initializing capture & source 
     cap = cv2.VideoCapture(0)
-    fourcc = cv2.VideoWriter_fourcc(*'XVID')  # Codec for AVI files
-    out = cv2.VideoWriter('Camera-01-footage.mp4', fourcc, 20.0, (640, 480))
 
-    # Creating loop to view footage
-    while (cap.isOpened):
+    # Force a safe FPS value
+    fps = 20.0
+    print(f"Using FPS: {fps}")
+    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    out = cv2.VideoWriter('Camera-01-footage.avi', fourcc, fps, (width, height))
+
+    # Load YOLO model once
+    model = YOLO("yolo11n.pt")
+
+    while cap.isOpened():
         ret, frame = cap.read()
-        detected_frame = detect_objects(frame)
-        
-        # Viewing the footage 
-        cv2.imshow("Camera-01",frame)
+        if not ret:
+            break
 
-        # Output code(saves the footage)
-        if ret == True:
-            out.write(frame)    
-        if cv2.waitKey(1) &0xFF == ord('q'):
+        detected_frame = detect_objects(frame, model)
+
+        cv2.imshow("Camera-01", detected_frame)
+        out.write(detected_frame)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
     cap.release()
+    out.release()
     cv2.destroyAllWindows()

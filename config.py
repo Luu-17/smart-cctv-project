@@ -13,8 +13,8 @@ ENABLE_DAILY_ORGANIZATION = True  # Automatically organize files into daily fold
 ENABLE_ZONE_DETECTION = True   # Enable restricted zone detection
 DETECTION_CLASSES = [0, 2]     # Classes to detect: 0=person, 2=car (modify as needed)
 
-# Camera Settings
-CAMERA_INDEX = "examples/Example Video (1).mp4"               # Camera device index (usually 0 for built-in webcam)
+# Camera SettingsExample Video (1).mp4
+CAMERA_INDEX = 0 #"examples/"  use any of the example in examples folder to see the output in action.  (usually 0 for built-in webcam)
 TARGET_FPS = 30.0              # Target frames per second for recording
 # Video codec options (try different ones if playback issues occur):
 VIDEO_CODEC = 'XVID'           # Primary: XVID (most reliable for normal playback)
@@ -24,7 +24,7 @@ VIDEO_EXTENSION = '.avi'       # Video file extension (use .avi with XVID)
 # VIDEO_EXTENSION = '.mp4'     # Use .mp4 if using mp4v codec
 
 # Model Settings
-YOLO_MODEL_PATH = "yolo11n.pt" # Path to YOLO model file
+YOLO_MODEL_PATH = "models/yolo11m.pt" # Path to YOLO model file
 
 # Zone Detection Settings
 ZONE_ALERT_COLOR = (0, 0, 255)  # BGR color for triggered zones (Red)
